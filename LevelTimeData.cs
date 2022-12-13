@@ -1,14 +1,14 @@
 using System.Collections;
 
 namespace TNSR.Scoring;
-sealed class LevelTimeData : ICollection<Level>
+class LevelTimeData : ICollection<Level>
 {
-    internal List<Level> levels = new();
+    public List<Level> levels = new();
 
     internal Level this[int levelNumber]
     {
         get => levels
-            .Where(level => level.levelNumber == levelNumber)
+            .Where(level => level.LevelNumber == levelNumber)
             .Single();
     }
 
