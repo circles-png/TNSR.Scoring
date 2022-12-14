@@ -12,7 +12,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -25,3 +24,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - uses: actions/upload-artifact@v3.1.1
+      with:
+        name: TNSR.Scoring
+        path: bin/Debug/net6.0/TNSR.Scoring.dll
