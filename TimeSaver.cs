@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 namespace TNSR.Scoring;
 
@@ -68,11 +68,7 @@ public static class TimeSaver
             SavePath,
             JsonSerializer.Serialize(
                 _timeData,
-                new JsonSerializerOptions()
-                {
-                    AllowTrailingCommas = true,
-                    WriteIndented = true
-                }
+                new JsonSerializerOptions() { AllowTrailingCommas = true }
             )
         );
     }
