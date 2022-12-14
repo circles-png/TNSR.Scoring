@@ -1,4 +1,4 @@
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace TNSR.Scoring;
 
@@ -21,8 +21,10 @@ public static class TimeSaver
     /// <param name="customTime">Optional custom time to use instead of the current time.</param>
     public static void SaveTime(int levelNumber, float timeTaken, DateTime? customTime = null)
     {
+        // Add the level if it doesn't exist
         if (_timeData.All(level => level.LevelNumber != levelNumber))
             _timeData.Add(new Level() { LevelNumber = levelNumber });
+        /// Add the time to the level
         _timeData[levelNumber]
             .Times
             .Add(new Time(timeTaken, customTime ?? DateTime.Now));
@@ -35,6 +37,7 @@ public static class TimeSaver
     /// <exception cref="Exception">There are no times saved on the level.</exception>
     public static Time GetBestTime(int levelNumber)
     {
+        // Order the times by time taken and return the first one
         return _timeData[levelNumber]
             .Times
             .OrderBy(time => time.TimeTaken)
@@ -62,6 +65,7 @@ public static class TimeSaver
     /// <exception cref="Exception">The path for saving times is not set.</exception>
     public static void WriteToFile()
     {
+        // Check if the path is set
         if (SavePath == "")
             throw new Exception("SavePath not set");
         File.WriteAllText(
