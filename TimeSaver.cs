@@ -95,8 +95,17 @@ public static class TimeSaver
     /// <summary>
     ///     Clear all time data in memory.
     /// </summary>
-    public static void ClearData()
+    public static void ClearData() => _timeData = new();
+    /// <summary>
+    ///     Return a list of all recorded times for a specified level.
+    /// </summary>
+    /// <param name="levelNumber">Number of level to get times for.</param>
+    /// <returns></returns>
+    /// <exception cref="Exception">Level not found in save data.</exception>
+    public static List<Time> GetAllTimes(int levelNumber)
     {
-        _timeData = new();
+        if (_timeData.All(level => level.LevelNumber != levelNumber))
+            throw new Exception($"Level {levelNumber} not found");
+        return _timeData[levelNumber].Times;
     }
 }
